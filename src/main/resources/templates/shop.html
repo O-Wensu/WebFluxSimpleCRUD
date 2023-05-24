@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table border="1">
+    <thead>
+    <tr>
+        <td><b>Id</b></td>
+        <td><b>Name</b></td>
+        <td><b>Origin</b></td>
+        <td><b>Price</b></td>
+        <td colspan="2"><b>Action</b></td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item : ${items}">
+        <td th:text="${item.id}"></td>
+        <td th:text="${item.name}"></td>
+        <td th:text="${item.origin}"></td>
+        <td th:text="${item.price}"></td>
+        <td>
+            <form th:method="post" th:action="@{'/cart/item/' + ${item.id}}">
+                <input type="submit" value="Add to Cart">
+            </form>
+        </td>
+        <td>
+        <form th:method="delete" th:action="@{'/item/delete/' + ${item.id}}">
+            <input type="submit" value="Delete to Cart">
+        </form>
+    </td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>My Cart</h2>
+<table border="1">
+    <thead>
+    <tr>
+        <td><b>Id</b></td>
+        <td><b>Name</b></td>
+        <td><b>Price</b></td>
+        <td><b>Origin</b></td>
+        <td><b>Quantity</b></td>
+        <td colspan="2"><b>Action</b></td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="cartItem : ${cart.cartItems}">
+        <td th:text="${cartItem.item.id}"></td>
+        <td th:text="${cartItem.item.name}"></td>
+        <td th:text="${cartItem.item.price}"></td>
+        <td th:text="${cartItem.item.origin}"></td>
+        <td th:text="${cartItem.quantity}"></td>
+        <td>
+            <form th:method="delete" th:action="@{'/cart/item/delete/' + ${cartItem.item.id}}">
+                <input type="submit" value="Delete to Cart Item One">
+            </form>
+        </td>
+        <td>
+            <form th:method="delete" th:action="@{'/cart/item/deleteAll/' + ${cartItem.item.id}}">
+                <input type="submit" value="Delete to Cart">
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
