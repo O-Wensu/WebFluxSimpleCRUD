@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Item Register</title>
+</head>
+<body>
+<h3>등록할 상품 정보를 입력해주세요.</h3>
+<label for="name">상품명:</label>
+<input type="text" id="name" name="name"><br><br>
+<label for="origin">원산지:</label>
+<input type="text" id="origin" name="origin"><br><br>
+<label for="price">가격:</label>
+<input type="number" id="price" name="price"><br><br>
+<button style="background-color:blue; color:white;" onclick="register()">생성하기</button>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    function register() {
+        var name = $('#name').val();
+        var origin = $('#origin').val();
+        var price = $('#price').val();
+
+        $.ajax({
+            url: '/item',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                'name': name,
+                'origin': origin,
+                'price': price
+            }),
+            success: function(data) {
+                alert('상품을 등록하였습니다.');
+                window.location.href = '/';
+            },
+            error: function(data) {
+                alert('상품 등록에 실패하였습니다.');
+            }
+        });
+    }
+</script>
+</body>
+</html>

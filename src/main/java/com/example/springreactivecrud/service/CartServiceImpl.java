@@ -3,6 +3,7 @@ package com.example.springreactivecrud.service;
 import com.example.springreactivecrud.domain.Cart;
 import com.example.springreactivecrud.domain.Item;
 import com.example.springreactivecrud.domain.vo.CartItem;
+import com.example.springreactivecrud.domain.vo.ItemRequestDto;
 import com.example.springreactivecrud.repository.CartReactiveRepository;
 import com.example.springreactivecrud.repository.ItemReactiveRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,12 @@ public class CartServiceImpl implements CartService {
     private final ItemReactiveRepository itemReactiveRepository;
     private final CartReactiveRepository cartReactiveRepository;
 
+    @Override
+    public Mono<Item> registerItem(ItemRequestDto itemRequestDto) {
+        Item newItem = new Item(itemRequestDto.getName(), itemRequestDto.getOrigin(), itemRequestDto.getPrice());
+
+        return itemReactiveRepository.save(newItem);
+    }
     @Override
     public Flux<Item> itemSearchName(String name, String origin, boolean isSuit) {
         Item item = Item.builder()

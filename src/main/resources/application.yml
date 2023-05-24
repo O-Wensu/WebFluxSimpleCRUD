@@ -1,10 +1,17 @@
 spring:
   webflux:
+    urlpatterns:
+      - "/**"
     hiddenmethod:
       filter:
         enabled: true
+  mvc:
+    throw-exception-if-no-handler-found: true
+    resources:
+      add-mappings: false
 
 logging:
   level:
     root: INFO
     com.example: DEBUG
+

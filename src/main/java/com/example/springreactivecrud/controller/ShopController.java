@@ -1,15 +1,13 @@
 package com.example.springreactivecrud.controller;
 
 import com.example.springreactivecrud.domain.Cart;
+import com.example.springreactivecrud.domain.vo.ItemRequestDto;
 import com.example.springreactivecrud.repository.CartReactiveRepository;
 import com.example.springreactivecrud.repository.ItemReactiveRepository;
 import com.example.springreactivecrud.service.CartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.reactive.result.view.Rendering;
 import reactor.core.publisher.Mono;
 
@@ -27,6 +25,17 @@ public class ShopController {
                 .modelAttribute("items", itemReactiveRepository.findAll())
                 .modelAttribute("cart", cartReactiveRepository.findById("My Cart")
                         .defaultIfEmpty(new Cart("My Cart"))).build());
+    }
+
+    @GetMapping("/item")
+    public Mono<Rendering> itemRegisterPage() {
+        return Mono.just(Rendering.view("register").build());
+    }
+
+    @PostMapping("/item")
+    public Mono<String> registerItem(@RequestBody ItemRequestDto itemRequestDto) {
+        return cartService.registerItem(itemRequestDto)
+                .thenReturn("redirect:/");
     }
 
     @PostMapping("/cart/item/{id}")

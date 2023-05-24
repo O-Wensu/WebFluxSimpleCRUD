@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Shop Home</title>
 </head>
 <body>
+<h2>Item List</h2>
 <table border="1">
     <thead>
     <tr>
@@ -28,12 +29,16 @@
         </td>
         <td>
         <form th:method="delete" th:action="@{'/item/delete/' + ${item.id}}">
-            <input type="submit" value="Delete to Cart">
+            <input type="submit" value="Delete Item">
         </form>
     </td>
     </tr>
     </tbody>
 </table>
+
+<button style="background-color:blue; color:white; margin-top: 10px" onclick="window.location.href='/item'">
+    Create new Item
+</button>
 
 <h2>My Cart</h2>
 <table border="1">

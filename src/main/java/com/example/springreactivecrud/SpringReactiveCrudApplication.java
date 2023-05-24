@@ -21,7 +21,7 @@ public class SpringReactiveCrudApplication {
 		SpringApplication.run(SpringReactiveCrudApplication.class, args);
 	}
 
-	@EventListener(ApplicationReadyEvent.class)
+/*	@EventListener(ApplicationReadyEvent.class)
 	public void startApp() {
 		mongoOperations.dropCollection(Item.class);
 		Item item1 = new Item("가죽 가방", "korea", 42000);
@@ -35,5 +35,5 @@ public class SpringReactiveCrudApplication {
 		for (Item item : itemList) {
 			mongoOperations.save(item);
 		}
-	}
+	}*/
 }
