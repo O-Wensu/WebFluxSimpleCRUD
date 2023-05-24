@@ -9,11 +9,11 @@
 <table border="1">
     <thead>
     <tr>
-        <td><b>Id</b></td>
-        <td><b>Name</b></td>
-        <td><b>Origin</b></td>
-        <td><b>Price</b></td>
-        <td colspan="2"><b>Action</b></td>
+        <td><b>상품번호</b></td>
+        <td><b>상품명</b></td>
+        <td><b>원산지</b></td>
+        <td><b>가격</b></td>
+        <td colspan="2"><b></b></td>
     </tr>
     </thead>
     <tbody>
@@ -24,12 +24,12 @@
         <td th:text="${item.price}"></td>
         <td>
             <form th:method="post" th:action="@{'/cart/item/' + ${item.id}}">
-                <input type="submit" value="Add to Cart">
+                <input type="submit" value="담기">
             </form>
         </td>
         <td>
         <form th:method="delete" th:action="@{'/item/delete/' + ${item.id}}">
-            <input type="submit" value="Delete Item">
+            <input type="submit" value="삭제">
         </form>
     </td>
     </tr>
@@ -37,36 +37,36 @@
 </table>
 
 <button style="background-color:blue; color:white; margin-top: 10px" onclick="window.location.href='/item'">
-    Create new Item
+    상품 등록
 </button>
 
 <h2>My Cart</h2>
 <table border="1">
     <thead>
     <tr>
-        <td><b>Id</b></td>
-        <td><b>Name</b></td>
-        <td><b>Price</b></td>
-        <td><b>Origin</b></td>
-        <td><b>Quantity</b></td>
-        <td colspan="2"><b>Action</b></td>
+        <td><b>상품번호</b></td>
+        <td><b>상품명</b></td>
+        <td><b>원산지</b></td>
+        <td><b>가격</b></td>
+        <td><b>수량</b></td>
+        <td colspan="2"><b></b></td>
     </tr>
     </thead>
     <tbody>
     <tr th:each="cartItem : ${cart.cartItems}">
         <td th:text="${cartItem.item.id}"></td>
         <td th:text="${cartItem.item.name}"></td>
-        <td th:text="${cartItem.item.price}"></td>
         <td th:text="${cartItem.item.origin}"></td>
+        <td th:text="${cartItem.item.price}"></td>
         <td th:text="${cartItem.quantity}"></td>
         <td>
             <form th:method="delete" th:action="@{'/cart/item/delete/' + ${cartItem.item.id}}">
-                <input type="submit" value="Delete to Cart Item One">
+                <input type="submit" value="단일 삭제">
             </form>
         </td>
         <td>
             <form th:method="delete" th:action="@{'/cart/item/deleteAll/' + ${cartItem.item.id}}">
-                <input type="submit" value="Delete to Cart">
+                <input type="submit" value="전체 삭제">
             </form>
         </td>
     </tr>
